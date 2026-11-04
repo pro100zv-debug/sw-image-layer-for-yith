@@ -18,6 +18,11 @@ on:
   release:
     types: [published]
   workflow_dispatch:
+    inputs:
+      rehacer:
+        description: 'Borrar el release y la etiqueta de esta versión y publicarlos de nuevo'
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -44,6 +49,11 @@ jobs:
             echo "mode=upload" >> "$GITHUB_OUTPUT"
           else
             TAG="v$VERSION"
+            if [ "${{ inputs.rehacer }}" = "true" ]; then
+              echo "Rehacer: se borran el release y la etiqueta $TAG."
+              gh release delete "$TAG" --yes --cleanup-tag || true
+              git push --delete origin "$TAG" 2>/dev/null || true
+            fi
             if gh release view "$TAG" >/dev/null 2>&1; then
               echo "El release $TAG ya existe: no se publica nada."
               echo "mode=skip" >> "$GITHUB_OUTPUT"
