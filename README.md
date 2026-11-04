@@ -11,7 +11,8 @@ Pensado para tiendas que ofrecen un bordado, un estampado o un parche: el client
 ## Qué hace
 
 - Coloca la imagen de la opción elegida sobre la **primera foto** de la galería del producto.
-- **Posición (X, Y) y ancho en %** propios de cada producto, con vista previa en el editor. Al ser porcentajes, se ve igual en ordenador y en móvil.
+- Funciona en todos los productos donde YITH muestra el complemento, con una **posición por defecto**.
+- En cada producto se puede escribir una **posición (X, Y) y un ancho en %** propios, con vista previa en el editor, o marcar **«No mostrar la imagen»**. Al ser porcentajes, se ve igual en ordenador y en móvil.
 - La imagen se mantiene al cambiar de color (variación).
 - En móvil, si la galería es un carrusel, vuelve a la primera foto al elegir una opción.
 - Mientras hay imagen elegida, el zoom al pasar el ratón no se muestra sobre la primera foto.
@@ -41,8 +42,11 @@ Las siguientes versiones aparecen en **Plugins** con el botón **Actualizar**, c
 1. **En YITH**, crea un bloque con:
    - un complemento **Sí / No** (tipo *Label or image*), con el precio en «Sí»;
    - un complemento con las opciones e **imagen en cada opción** (tipo *Label or image*), que se muestre solo cuando «Sí» está elegido (*Conditional logic*).
-2. **WooCommerce → Ajustes → SW Image Layer**: elige el complemento con imágenes y ajusta los textos, las filas visibles y el color.
-3. **En cada producto**: *Datos del producto* → pestaña **SW Image Layer** → activa «Mostrar imagen sobre la foto» y ajusta X, Y y ancho mirando la vista previa.
+   Los productos donde aparece el bloque (por producto o por categoría) se eligen en YITH.
+2. **WooCommerce → Ajustes → SW Image Layer**: elige el complemento con imágenes, ajusta los textos, las filas visibles, el color y la **posición por defecto**.
+3. **En cada producto que lo necesite**: *Datos del producto* → pestaña **SW Image Layer**:
+   - escribe X, Y y ancho propios mirando la vista previa (campo vacío = posición por defecto);
+   - o marca **«No mostrar la imagen»** para que en ese producto no se coloque sobre la foto.
 
 ### Imágenes recomendadas
 
@@ -68,6 +72,12 @@ Los colores y medidas son variables CSS. Ejemplo para el CSS del tema:
 3. Sube los cambios a `main`. La acción «Publicar versión» crea el release `vX.Y.Z` con el ZIP; los sitios ven «Actualizar» en Plugins.
 
 ## Cambios
+
+### 1.1.0
+- La imagen se muestra en todos los productos donde YITH muestra el complemento; ya no hay que activarla producto por producto.
+- Nueva posición por defecto (X, Y, ancho) en los ajustes; en el producto, los campos vacíos usan esa posición.
+- Nueva casilla «No mostrar la imagen» en el producto.
+- Corregido: las casillas desactivadas («Buscador» y la del producto) se tomaban como activadas.
 
 ### 1.0.2
 - El buscador ya no sobresale del recuadro de la lista.

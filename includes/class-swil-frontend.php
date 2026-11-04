@@ -23,10 +23,8 @@ class SWIL_Frontend {
 			return;
 		}
 
-		$product_id = get_queried_object_id();
-		$config     = SWIL_Product::get_config( $product_id );
-		$zone       = $config['zones'][0];
-		$accent     = sanitize_hex_color( SWIL_Settings::get( 'accent' ) );
+		$config = SWIL_Product::get_config( get_queried_object_id() );
+		$accent = sanitize_hex_color( SWIL_Settings::get( 'accent' ) );
 
 		wp_enqueue_style( 'swil-front', SWIL_URL . 'assets/css/swil-front.css', array(), SWIL_VERSION );
 		if ( $accent ) {
@@ -34,23 +32,23 @@ class SWIL_Frontend {
 		}
 
 		wp_enqueue_script( 'swil-front', SWIL_URL . 'assets/js/swil-front.js', array( 'jquery' ), SWIL_VERSION, true );
-		wp_localize_script(
-			'swil-front',
-			'swilData',
-			array(
-				'addonId'     => $addon_id,
-				'enabled'     => $config['enabled'] ? 1 : 0,
-				'zone'        => array(
-					'x' => (float) $zone['x'],
-					'y' => (float) $zone['y'],
-					'w' => (float) $zone['w'],
-				),
-				'search'      => 'yes' === SWIL_Settings::get( 'search' ) ? 1 : 0,
-				'rows'        => max( 2, min( 20, absint( SWIL_Settings::get( 'rows' ) ) ) ),
-				'placeholder' => SWIL_Settings::get( 'placeholder' ),
-				'emptyText'   => SWIL_Settings::get( 'empty_text' ),
-				'hint'        => get_option( 'swil_hint', SWIL_Settings::defaults()['hint'] ),
-			)
+
+		// JSON (no wp_localize_script): así los números y los sí/no llegan como tales y no como texto.
+		$data = array(
+			'addonId'     => $addon_id,
+			'enabled'     => ! $config['hidden'],
+			'zone'        => array(
+				'x' => (float) $config['zone']['x'],
+				'y' => (float) $config['zone']['y'],
+				'w' => (float) $config['zone']['w'],
+			),
+			'search'      => 'yes' === SWIL_Settings::get( 'search' ),
+			'rows'        => max( 2, min( 20, absint( SWIL_Settings::get( 'rows' ) ) ) ),
+			'placeholder' => (string) SWIL_Settings::get( 'placeholder' ),
+			'emptyText'   => (string) SWIL_Settings::get( 'empty_text' ),
+			'hint'        => (string) get_option( 'swil_hint', SWIL_Settings::defaults()['hint'] ),
 		);
+
+		wp_add_inline_script( 'swil-front', 'window.swilData = ' . wp_json_encode( $data ) . ';', 'before' );
 	}
 }

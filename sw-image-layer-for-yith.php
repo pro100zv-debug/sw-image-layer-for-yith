@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       SW Image Layer for YITH Product
  * Description:       Superposición de la imagen del complemento de YITH sobre la foto principal del producto. Añade buscador a la lista de opciones con imagen y coloca la imagen elegida (por ejemplo, un escudo bordado) sobre la primera foto de la galería, con posición y tamaño propios en cada producto.
- * Version:           1.0.2
+ * Version:           1.1.0
  * Requires at least: 6.5
  * Requires PHP:      7.4
  * Requires Plugins:  woocommerce, yith-woocommerce-advanced-product-options-premium
@@ -17,7 +17,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'SWIL_VERSION', '1.0.2' );
+define( 'SWIL_VERSION', '1.1.0' );
 define( 'SWIL_FILE', __FILE__ );
 define( 'SWIL_DIR', plugin_dir_path( __FILE__ ) );
 define( 'SWIL_URL', plugin_dir_url( __FILE__ ) );

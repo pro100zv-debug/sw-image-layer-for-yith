@@ -142,7 +142,7 @@ class SWIL_Updater {
 
 		$description  = '<p>Superposición de la imagen del complemento de YITH sobre la foto principal del producto.</p>';
 		$description .= '<ul><li>Coloca la imagen elegida en YITH Product Add-ons (por ejemplo, un escudo bordado) sobre la primera foto de la galería.</li>';
-		$description .= '<li>Posición (X, Y) y ancho en porcentaje, propios de cada producto.</li>';
+		$description .= '<li>Se muestra en todos los productos donde YITH muestra el complemento, con una posición por defecto.</li><li>En cada producto: posición (X, Y) y ancho propios en porcentaje, o casilla para no mostrar la imagen.</li>';
 		$description .= '<li>Buscador sin distinguir mayúsculas ni tildes, lista con desplazamiento y texto de ayuda.</li>';
 		$description .= '<li>Probado con WooCommerce y el tema WoodMart (cuadrícula y carrusel).</li></ul>';
 		$description .= '<p><strong>Requiere:</strong> WooCommerce y YITH WooCommerce Product Add-ons &amp; Extra Options Premium.</p>';

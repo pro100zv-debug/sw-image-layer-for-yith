@@ -16,6 +16,13 @@
 		return;
 	}
 
+	/* Sí/no seguros aunque lleguen como texto ("0", "1", "yes") */
+	function isOn(v) {
+		return v === true || v === 1 || v === '1' || v === 'yes';
+	}
+	var ENABLED = isOn(C.enabled);
+	var SEARCH = isOn(C.search);
+
 	var ADDON = '#yith-wapo-addon-' + C.addonId;
 	var OPTION = '.yith-wapo-option';
 	var INPUT = 'input.yith-wapo-option-value';
@@ -69,7 +76,7 @@
 			}
 		}
 
-		if (C.search && $options.length) {
+		if (SEARCH && $options.length) {
 			var $search = $(
 				'<div class="swil-search">' +
 				'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg>' +
@@ -230,7 +237,7 @@
 		$a.toggleClass('swil-error', yithError && !hasSelection);
 
 		var src = '';
-		if (C.enabled && hasSelection) {
+		if (ENABLED && hasSelection) {
 			src = $selected.find('.image-container img, img').first().attr('src') || '';
 		}
 

@@ -55,7 +55,23 @@ class SWIL_Settings {
 			'hint'        => 'Selecciona una opción para continuar.',
 			'rows'        => 5,
 			'accent'      => '#811609',
+			'default_x'   => 50,
+			'default_y'   => 35,
+			'default_w'   => 18,
 		);
+	}
+
+	/**
+	 * Posición por defecto: [ 'x' => , 'y' => , 'w' => ].
+	 */
+	public static function default_zone() {
+		$zone = array();
+		foreach ( array( 'x', 'y', 'w' ) as $key ) {
+			$value        = (float) str_replace( ',', '.', (string) self::get( 'default_' . $key ) );
+			$min          = 'w' === $key ? 1 : 0;
+			$zone[ $key ] = round( min( 100, max( $min, $value ) ), 2 );
+		}
+		return $zone;
 	}
 
 	private static function fields() {
@@ -89,7 +105,7 @@ class SWIL_Settings {
 			array(
 				'title' => __( 'SW Image Layer for YITH Product', 'sw-image-layer-for-yith' ),
 				'type'  => 'title',
-				'desc'  => __( 'La posición y el tamaño de la imagen se ajustan en cada producto: Producto → Datos del producto → pestaña «SW Image Layer».', 'sw-image-layer-for-yith' ),
+				'desc'  => __( 'La imagen se muestra en todos los productos donde YITH muestra este complemento. Para ocultarla o cambiar su posición en un producto: Producto → Datos del producto → pestaña «SW Image Layer».', 'sw-image-layer-for-yith' ),
 				'id'    => 'swil_general',
 			),
 			$addon_field,
@@ -142,6 +158,43 @@ class SWIL_Settings {
 			array(
 				'type' => 'sectionend',
 				'id'   => 'swil_general',
+			),
+			array(
+				'title' => __( 'Posición por defecto', 'sw-image-layer-for-yith' ),
+				'type'  => 'title',
+				'desc'  => __( 'Se usa en todos los productos que muestran el complemento. En cada producto puedes escribir su propia posición o dejar los campos vacíos para usar esta.', 'sw-image-layer-for-yith' ),
+				'id'    => 'swil_position',
+			),
+			array(
+				'title'             => __( 'Posición horizontal (X, %)', 'sw-image-layer-for-yith' ),
+				'desc'              => __( 'Centro de la imagen desde el borde izquierdo de la foto. 50 = centro.', 'sw-image-layer-for-yith' ),
+				'id'                => 'swil_default_x',
+				'type'              => 'number',
+				'default'           => $d['default_x'],
+				'css'               => 'width:90px;',
+				'custom_attributes' => array( 'min' => 0, 'max' => 100, 'step' => '0.1' ),
+			),
+			array(
+				'title'             => __( 'Posición vertical (Y, %)', 'sw-image-layer-for-yith' ),
+				'desc'              => __( 'Centro de la imagen desde el borde superior de la foto.', 'sw-image-layer-for-yith' ),
+				'id'                => 'swil_default_y',
+				'type'              => 'number',
+				'default'           => $d['default_y'],
+				'css'               => 'width:90px;',
+				'custom_attributes' => array( 'min' => 0, 'max' => 100, 'step' => '0.1' ),
+			),
+			array(
+				'title'             => __( 'Ancho (%)', 'sw-image-layer-for-yith' ),
+				'desc'              => __( 'Ancho de la imagen respecto al ancho de la foto.', 'sw-image-layer-for-yith' ),
+				'id'                => 'swil_default_w',
+				'type'              => 'number',
+				'default'           => $d['default_w'],
+				'css'               => 'width:90px;',
+				'custom_attributes' => array( 'min' => 1, 'max' => 100, 'step' => '0.1' ),
+			),
+			array(
+				'type' => 'sectionend',
+				'id'   => 'swil_position',
 			),
 		);
 	}
