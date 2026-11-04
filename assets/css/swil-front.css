@@ -1,0 +1,281 @@
+/* =====================================================================
+   SW Image Layer for YITH Product · ficha de producto
+   Colores y medidas en variables: se pueden cambiar desde el CSS del tema.
+   ===================================================================== */
+
+:root {
+	--swil-accent: #811609;
+	--swil-border: #dcdcdc;
+	--swil-divider: #efefef;
+	--swil-text: #222222;
+	--swil-muted: #777777;
+	--swil-hover: #f7f7f7;
+	--swil-thumb: 44px;
+	--swil-row-h: 64px;
+}
+
+/* ---------- Capa sobre la primera foto ---------- */
+
+.swil-has-layer {
+	position: relative;
+}
+
+.swil-layer {
+	position: absolute;
+	z-index: 5;
+	display: block;
+	transform: translate(-50%, -50%);
+	line-height: 0;
+	pointer-events: none;
+}
+
+.swil-layer img {
+	display: block !important;
+	width: 100% !important;
+	max-width: none !important;
+	height: auto !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	border: 0 !important;
+	box-shadow: none !important;
+}
+
+/* Con imagen elegida, el zoom al pasar el ratón no se ve sobre la primera foto */
+.swil-has-layer .zoomImg {
+	display: none !important;
+}
+
+/* ---------- Lista de YITH ---------- */
+
+.swil-addon {
+	--swil-rows: 5;
+}
+
+.swil-addon .wapo-addon-title .required,
+.swil-addon .addon-header .required,
+.swil-addon .min-error {
+	display: none !important;
+}
+
+.swil-hint {
+	margin: 0 0 14px !important;
+	font-size: 14px;
+	line-height: 1.5;
+	color: var(--swil-accent);
+}
+
+.swil-addon.swil-has-selection .swil-hint {
+	display: none;
+}
+
+.swil-addon.swil-error .swil-hint {
+	font-weight: 700;
+}
+
+.swil-addon .options-container {
+	display: block !important;
+	border: 1px solid var(--swil-border);
+	background: #fff;
+}
+
+/* Buscador */
+.swil-search {
+	position: relative;
+	padding: 10px;
+	border-bottom: 1px solid var(--swil-border);
+}
+
+.swil-search svg {
+	position: absolute;
+	top: 50%;
+	left: 22px;
+	width: 18px;
+	height: 18px;
+	transform: translateY(-50%);
+	fill: none;
+	stroke: var(--swil-muted);
+	stroke-width: 2;
+	stroke-linecap: round;
+	pointer-events: none;
+}
+
+.swil-search input[type="search"] {
+	display: block;
+	width: 100% !important;
+	height: 46px !important;
+	min-height: 0 !important;
+	margin: 0 !important;
+	padding: 0 12px 0 40px !important;
+	border: 1px solid var(--swil-border) !important;
+	border-radius: 0 !important;
+	background: #fff !important;
+	box-shadow: none !important;
+	font-family: inherit;
+	font-size: 15px !important;
+	line-height: 1.2 !important;
+	color: var(--swil-text) !important;
+	-webkit-appearance: none;
+	appearance: none;
+}
+
+.swil-search input[type="search"]:focus {
+	border-color: var(--swil-accent) !important;
+	outline: none;
+}
+
+.swil-search input[type="search"]::placeholder {
+	color: #9a9a9a;
+	opacity: 1;
+}
+
+/* Lista con desplazamiento */
+.swil-addon .options {
+	display: block !important;
+	max-height: calc(var(--swil-rows) * var(--swil-row-h));
+	margin: 0 !important;
+	padding: 0 !important;
+	overflow-y: auto;
+	overscroll-behavior: contain;
+	-webkit-overflow-scrolling: touch;
+}
+
+.swil-addon .yith-wapo-option {
+	display: block !important;
+	width: 100% !important;
+	max-width: none !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	border: 0 !important;
+	border-bottom: 1px solid var(--swil-divider) !important;
+	border-radius: 0 !important;
+	background: #fff !important;
+	box-shadow: none !important;
+	cursor: pointer;
+	transition: background-color .15s ease;
+}
+
+.swil-addon .yith-wapo-option:last-child {
+	border-bottom: 0 !important;
+}
+
+.swil-addon .yith-wapo-option.swil-hidden {
+	display: none !important;
+}
+
+/* Quitar bordes, fondos y marcas que YITH pone dentro de cada opción */
+.swil-addon .yith-wapo-option * {
+	border: 0 !important;
+	border-radius: 0 !important;
+	background: none !important;
+	box-shadow: none !important;
+}
+
+.swil-addon .yith-wapo-option *::before,
+.swil-addon .yith-wapo-option *::after {
+	display: none !important;
+}
+
+.swil-addon .yith-wapo-option .label_container,
+.swil-addon .yith-wapo-option div.label {
+	display: block !important;
+	position: static !important;
+	width: 100% !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	cursor: pointer;
+}
+
+.swil-addon .yith-wapo-option .label-container-display {
+	display: flex !important;
+	align-items: center;
+	gap: 14px;
+	min-height: var(--swil-row-h);
+	margin: 0 !important;
+	padding: 8px 14px !important;
+	box-sizing: border-box;
+}
+
+.swil-addon .yith-wapo-option .image-container,
+.swil-addon .yith-wapo-option .image-container .image {
+	display: block !important;
+	flex: 0 0 var(--swil-thumb);
+	width: var(--swil-thumb) !important;
+	height: var(--swil-thumb) !important;
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+.swil-addon .yith-wapo-option .image-container img {
+	display: block !important;
+	width: var(--swil-thumb) !important;
+	max-width: none !important;
+	height: var(--swil-thumb) !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	object-fit: contain;
+}
+
+.swil-addon .yith-wapo-option .inside,
+.swil-addon .yith-wapo-option .label_price {
+	display: block !important;
+	position: static !important;
+	width: auto !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	text-align: left !important;
+}
+
+.swil-addon .yith-wapo-option .outside {
+	display: none !important;
+}
+
+.swil-addon .yith-wapo-option label {
+	display: block !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	font-size: 15px !important;
+	font-weight: 400 !important;
+	line-height: 1.35 !important;
+	text-align: left !important;
+	text-transform: none !important;
+	letter-spacing: 0 !important;
+	color: var(--swil-text) !important;
+	cursor: pointer;
+	pointer-events: none;
+}
+
+.swil-addon .yith-wapo-option .option-price {
+	display: none !important;
+}
+
+.swil-addon .yith-wapo-option:hover {
+	background: var(--swil-hover) !important;
+}
+
+.swil-addon .yith-wapo-option.selected {
+	background: #fbf5f4 !important;
+	background: color-mix(in srgb, var(--swil-accent) 7%, #fff) !important;
+	box-shadow: inset 3px 0 0 var(--swil-accent) !important;
+}
+
+.swil-addon .yith-wapo-option.selected label {
+	color: var(--swil-accent) !important;
+}
+
+.swil-empty {
+	margin: 0 !important;
+	padding: 18px 14px;
+	font-size: 14px;
+	line-height: 1.4;
+	color: var(--swil-muted);
+}
+
+.swil-empty[hidden] {
+	display: none !important;
+}
+
+@media (max-width: 767px) {
+	.swil-addon .yith-wapo-option label {
+		font-size: 14px !important;
+	}
+}

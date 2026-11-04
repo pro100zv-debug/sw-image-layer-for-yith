@@ -1,0 +1,88 @@
+# Publica una versión del plugin.
+#
+# Dos formas de lanzarla:
+#  1. Cambiar «Version:» en sw-image-layer-for-yith.php y subirlo a main.
+#     Si todavía no existe el release vX.Y.Z, se crea con la etiqueta, el ZIP
+#     y, como descripción, la sección «### X.Y.Z» del apartado «Cambios» de README.md.
+#  2. Publicar un release a mano en GitHub: solo se le adjunta el ZIP.
+#
+# El ZIP se llama siempre sw-image-layer-for-yith.zip: lo usan las actualizaciones
+# de WordPress y el enlace de descarga
+# https://github.com/pro100zv-debug/sw-image-layer-for-yith/releases/latest/download/sw-image-layer-for-yith.zip
+name: Publicar versión
+
+on:
+  push:
+    branches: [main]
+    paths: ['sw-image-layer-for-yith.php']
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar el código
+        uses: actions/checkout@v4
+
+      - name: Datos de la versión
+        id: v
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VERSION=$(grep -m1 -E '^\s*\*\s*Version:' sw-image-layer-for-yith.php | sed -E 's/.*Version:\s*//; s/\s+$//')
+          if [ "${{ github.event_name }}" = "release" ]; then
+            TAG="${{ github.event.release.tag_name }}"
+            if [ "${TAG#v}" != "$VERSION" ]; then
+              echo "::error::El release $TAG no coincide con Version: $VERSION en sw-image-layer-for-yith.php"
+              exit 1
+            fi
+            echo "mode=upload" >> "$GITHUB_OUTPUT"
+          else
+            TAG="v$VERSION"
+            if gh release view "$TAG" >/dev/null 2>&1; then
+              echo "El release $TAG ya existe: no se publica nada."
+              echo "mode=skip" >> "$GITHUB_OUTPUT"
+            else
+              echo "mode=create" >> "$GITHUB_OUTPUT"
+            fi
+          fi
+          # Notas: sección «### VERSION» de README.md, hasta el siguiente título
+          awk -v v="### $VERSION" '
+            $0 == v {on=1; next}
+            on && /^#{2,3} / {exit}
+            on {print}
+          ' README.md > /tmp/notas.md
+          [ -s /tmp/notas.md ] || echo "Versión $VERSION." > /tmp/notas.md
+          echo "Etiqueta: $TAG"; cat /tmp/notas.md
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Crear el ZIP
+        if: steps.v.outputs.mode != 'skip'
+        run: |
+          mkdir -p /tmp/build/sw-image-layer-for-yith
+          rsync -a ./ /tmp/build/sw-image-layer-for-yith/ \
+            --exclude='.git' --exclude='.github' --exclude='.wp-assets' --exclude='.gitignore'
+          cd /tmp/build
+          zip -r sw-image-layer-for-yith.zip sw-image-layer-for-yith
+
+      - name: Crear el release
+        if: steps.v.outputs.mode == 'create'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${{ steps.v.outputs.tag }}" /tmp/build/sw-image-layer-for-yith.zip \
+            --target "${{ github.sha }}" \
+            --title "${{ steps.v.outputs.version }}" \
+            --notes-file /tmp/notas.md
+
+      - name: Adjuntar el ZIP al release publicado a mano
+        if: steps.v.outputs.mode == 'upload'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "${{ steps.v.outputs.tag }}" /tmp/build/sw-image-layer-for-yith.zip --clobber

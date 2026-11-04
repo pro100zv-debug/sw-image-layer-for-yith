@@ -1,0 +1,48 @@
+/* SW Image Layer · pestaña del producto */
+#swil_product_data .swil-preview {
+	position: relative;
+	display: inline-block;
+	width: 260px;
+	max-width: 100%;
+	line-height: 0;
+	border: 1px solid #dcdcde;
+	background: #f6f7f7;
+	vertical-align: top;
+}
+
+#swil_product_data .swil-preview-photo {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+#swil_product_data .swil-preview-layer {
+	position: absolute;
+	transform: translate(-50%, -50%);
+	line-height: 0;
+	pointer-events: none;
+}
+
+#swil_product_data .swil-preview-layer img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+#swil_product_data .swil-preview-layer.is-empty {
+	aspect-ratio: 1 / 1;
+	border: 2px dashed #811609;
+	background: rgba(129, 22, 9, .08);
+}
+
+#swil_product_data .swil-preview.is-off .swil-preview-layer {
+	opacity: .35;
+}
+
+#swil_product_data .swil-preview-note {
+	display: block;
+	clear: both;
+	margin: 8px 0 0;
+	max-width: 420px;
+	line-height: 1.5;
+}
