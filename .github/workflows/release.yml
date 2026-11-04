@@ -86,13 +86,29 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "${{ steps.v.outputs.tag }}" /tmp/build/sw-image-layer-for-yith.zip \
-            --target "${{ github.sha }}" \
-            --title "${{ steps.v.outputs.version }}" \
-            --notes-file /tmp/notas.md
+          # GitHub a veces responde 502: se reintenta hasta 5 veces
+          for i in 1 2 3 4 5; do
+            if gh release view "${{ steps.v.outputs.tag }}" >/dev/null 2>&1; then
+              echo "Release creado."; exit 0
+            fi
+            gh release create "${{ steps.v.outputs.tag }}" \
+              --target "${{ github.sha }}" \
+              --title "${{ steps.v.outputs.version }}" \
+              --notes-file /tmp/notas.md || true
+            sleep $((i * 5))
+          done
+          gh release view "${{ steps.v.outputs.tag }}" >/dev/null
 
-      - name: Adjuntar el ZIP al release publicado a mano
-        if: steps.v.outputs.mode == 'upload'
+      - name: Adjuntar el ZIP
+        if: steps.v.outputs.mode != 'skip'
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release upload "${{ steps.v.outputs.tag }}" /tmp/build/sw-image-layer-for-yith.zip --clobber
+        run: |
+          for i in 1 2 3 4 5; do
+            gh release upload "${{ steps.v.outputs.tag }}" /tmp/build/sw-image-layer-for-yith.zip --clobber || true
+            if gh release view "${{ steps.v.outputs.tag }}" --json assets --jq '.assets[].name' | grep -qx 'sw-image-layer-for-yith.zip'; then
+              echo "ZIP adjuntado."; exit 0
+            fi
+            sleep $((i * 5))
+          done
+          echo "::error::No se pudo adjuntar el ZIP"; exit 1
