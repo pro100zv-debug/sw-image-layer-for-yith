@@ -1,0 +1,152 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: SW Image Layer for YITH Product 1.2.0\n"
+"Report-Msgid-Bugs-To: https://github.com/pro100zv-debug/sw-image-layer-for-yith/issues\n"
+"POT-Creation-Date: 2026-11-04 13:25+0000\n"
+"PO-Revision-Date: 2026-11-04 13:25+0000\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Domain: sw-image-layer-for-yith\n"
+
+msgid "Settings"
+msgstr ""
+
+msgid "Width (%)"
+msgstr ""
+
+msgid "Image width relative to the photo width."
+msgstr ""
+
+msgid "Set a product image to see the preview."
+msgstr ""
+
+msgid "Search box"
+msgstr ""
+
+msgid "Check for updates"
+msgstr ""
+
+msgid "Center of the image from the left edge of the photo. 50 = center."
+msgstr ""
+
+msgid "Center of the image from the top edge of the photo."
+msgstr ""
+
+msgid "Accent color"
+msgstr ""
+
+msgid "Image add-on"
+msgstr ""
+
+msgid "YITH add-on («Label or image» type) whose images are placed on the product photo. Its list gets the search box."
+msgstr ""
+
+msgid "How many options are visible without scrolling; the rest scroll inside the list."
+msgstr ""
+
+#, php-format
+msgid "Leave a field empty to use the default position (%s)."
+msgstr ""
+
+msgid "On this product the chosen image is not placed on the photo. The YITH option and its price stay."
+msgstr ""
+
+msgid "Visible rows"
+msgstr ""
+
+msgid "Add-on ID"
+msgstr ""
+
+msgid "Main product image. The preview changes as you type; update the product to apply the values."
+msgstr ""
+
+msgid "The image is shown on every product where YITH shows this add-on. To hide it or change its position on a product: Product → Product data → «SW Image Layer» tab."
+msgstr ""
+
+msgid "Show a search box above the list"
+msgstr ""
+
+msgid "Do not show the image"
+msgstr ""
+
+msgid "The YITH list could not be read. Enter the add-on number: it appears on the page as id=\"yith-wapo-addon-NUMBER\"."
+msgstr ""
+
+msgid "Selected option, active search box border and help text."
+msgstr ""
+
+msgid "Horizontal position (X, %)"
+msgstr ""
+
+msgid "Default position"
+msgstr ""
+
+msgid "Vertical position (Y, %)"
+msgstr ""
+
+msgid "SW Image Layer for YITH Product"
+msgstr ""
+
+msgid "Shown above the list while no option is selected; replaces the YITH error notice. Leave empty to hide it."
+msgstr ""
+
+msgid "Used on every product that shows the add-on. On each product you can enter its own position or leave the fields empty to use this one."
+msgstr ""
+
+msgid "Untitled"
+msgstr ""
+
+msgid "Help text"
+msgstr ""
+
+msgid "Search placeholder"
+msgstr ""
+
+msgid "No results text"
+msgstr ""
+
+msgid "Preview"
+msgstr ""
+
+msgid "requires the YITH WooCommerce Product Add-ons & Extra Options Premium plugin to be active."
+msgstr ""
+
+msgid "— Select an add-on —"
+msgstr ""
+
+msgid "Places the image chosen in YITH Product Add-ons (for example, an embroidered crest) on the first photo of the product gallery."
+msgstr ""
+
+msgid "Shown on every product where YITH shows the add-on, with a default position."
+msgstr ""
+
+msgid "Per product: own position (X, Y) and width in percent, or a checkbox to hide the image."
+msgstr ""
+
+msgid "Search box that ignores case and accents, scrollable list and help text."
+msgstr ""
+
+msgid "Tested with WooCommerce and the WoodMart theme (grid and carousel gallery)."
+msgstr ""
+
+msgid "Overlays the image of the YITH add-on on the main product photo."
+msgstr ""
+
+msgid "Requires:"
+msgstr ""
+
+msgid "Search…"
+msgstr ""
+
+msgid "No results found."
+msgstr ""
+
+msgid "Select an option to continue."
+msgstr ""
+
+msgid "Overlays the image chosen in a YITH Product Add-ons option on the main product photo. Adds a search box to image option lists and places the chosen image (for example, an embroidered crest) on the first gallery photo, with its own position and size per product."
+msgstr ""
+

@@ -85,8 +85,8 @@ class SWIL_Product {
 				woocommerce_wp_checkbox(
 					array(
 						'id'          => 'swil_hidden',
-						'label'       => __( 'No mostrar la imagen', 'sw-image-layer-for-yith' ),
-						'description' => __( 'En este producto la imagen elegida no se coloca sobre la foto. La opción de YITH y su precio se mantienen.', 'sw-image-layer-for-yith' ),
+						'label'       => __( 'Do not show the image', 'sw-image-layer-for-yith' ),
+						'description' => __( 'On this product the chosen image is not placed on the photo. The YITH option and its price stay.', 'sw-image-layer-for-yith' ),
 						'value'       => $hidden ? 'yes' : 'no',
 						'cbvalue'     => 'yes',
 					)
@@ -99,16 +99,16 @@ class SWIL_Product {
 					<?php
 					printf(
 						/* translators: %s: enlace a los ajustes */
-						esc_html__( 'Deja un campo vacío para usar la posición por defecto (%s).', 'sw-image-layer-for-yith' ),
-						'<a href="' . esc_url( $settings ) . '" target="_blank">' . esc_html__( 'Ajustes', 'sw-image-layer-for-yith' ) . '</a>'
+						esc_html__( 'Leave a field empty to use the default position (%s).', 'sw-image-layer-for-yith' ),
+						'<a href="' . esc_url( $settings ) . '" target="_blank">' . esc_html__( 'Settings', 'sw-image-layer-for-yith' ) . '</a>'
 					);
 					?>
 				</p>
 				<?php
 				$fields = array(
-					'x' => array( __( 'Posición horizontal (X, %)', 'sw-image-layer-for-yith' ), __( 'Centro de la imagen desde el borde izquierdo de la foto. 50 = centro.', 'sw-image-layer-for-yith' ), 0, 100 ),
-					'y' => array( __( 'Posición vertical (Y, %)', 'sw-image-layer-for-yith' ), __( 'Centro de la imagen desde el borde superior de la foto.', 'sw-image-layer-for-yith' ), 0, 100 ),
-					'w' => array( __( 'Ancho (%)', 'sw-image-layer-for-yith' ), __( 'Ancho de la imagen respecto al ancho de la foto.', 'sw-image-layer-for-yith' ), 1, 100 ),
+					'x' => array( __( 'Horizontal position (X, %)', 'sw-image-layer-for-yith' ), __( 'Center of the image from the left edge of the photo. 50 = center.', 'sw-image-layer-for-yith' ), 0, 100 ),
+					'y' => array( __( 'Vertical position (Y, %)', 'sw-image-layer-for-yith' ), __( 'Center of the image from the top edge of the photo.', 'sw-image-layer-for-yith' ), 0, 100 ),
+					'w' => array( __( 'Width (%)', 'sw-image-layer-for-yith' ), __( 'Image width relative to the photo width.', 'sw-image-layer-for-yith' ), 1, 100 ),
 				);
 
 				foreach ( $fields as $key => $f ) {
@@ -134,7 +134,7 @@ class SWIL_Product {
 
 			<div class="options_group swil-preview-group">
 				<p class="form-field">
-					<label><?php esc_html_e( 'Vista previa', 'sw-image-layer-for-yith' ); ?></label>
+					<label><?php esc_html_e( 'Preview', 'sw-image-layer-for-yith' ); ?></label>
 					<?php if ( $photo ) : ?>
 						<span class="swil-preview" id="swil-preview">
 							<img src="<?php echo esc_url( $photo ); ?>" alt="" class="swil-preview-photo">
@@ -144,9 +144,9 @@ class SWIL_Product {
 								<?php endif; ?>
 							</span>
 						</span>
-						<span class="description swil-preview-note"><?php esc_html_e( 'Imagen principal del producto. La vista previa cambia al escribir los valores; guarda el producto para aplicarlos.', 'sw-image-layer-for-yith' ); ?></span>
+						<span class="description swil-preview-note"><?php esc_html_e( 'Main product image. The preview changes as you type; update the product to apply the values.', 'sw-image-layer-for-yith' ); ?></span>
 					<?php else : ?>
-						<span class="description"><?php esc_html_e( 'Asigna una imagen principal al producto para ver la vista previa.', 'sw-image-layer-for-yith' ); ?></span>
+						<span class="description"><?php esc_html_e( 'Set a product image to see the preview.', 'sw-image-layer-for-yith' ); ?></span>
 					<?php endif; ?>
 				</p>
 			</div>

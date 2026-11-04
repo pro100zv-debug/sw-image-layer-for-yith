@@ -140,12 +140,19 @@ class SWIL_Updater {
 		$release = self::release();
 		$version = $release ? $release['version'] : SWIL_VERSION;
 
-		$description  = '<p>Superposición de la imagen del complemento de YITH sobre la foto principal del producto.</p>';
-		$description .= '<ul><li>Coloca la imagen elegida en YITH Product Add-ons (por ejemplo, un escudo bordado) sobre la primera foto de la galería.</li>';
-		$description .= '<li>Se muestra en todos los productos donde YITH muestra el complemento, con una posición por defecto.</li><li>En cada producto: posición (X, Y) y ancho propios en porcentaje, o casilla para no mostrar la imagen.</li>';
-		$description .= '<li>Buscador sin distinguir mayúsculas ni tildes, lista con desplazamiento y texto de ayuda.</li>';
-		$description .= '<li>Probado con WooCommerce y el tema WoodMart (cuadrícula y carrusel).</li></ul>';
-		$description .= '<p><strong>Requiere:</strong> WooCommerce y YITH WooCommerce Product Add-ons &amp; Extra Options Premium.</p>';
+		$items = array(
+			__( 'Places the image chosen in YITH Product Add-ons (for example, an embroidered crest) on the first photo of the product gallery.', 'sw-image-layer-for-yith' ),
+			__( 'Shown on every product where YITH shows the add-on, with a default position.', 'sw-image-layer-for-yith' ),
+			__( 'Per product: own position (X, Y) and width in percent, or a checkbox to hide the image.', 'sw-image-layer-for-yith' ),
+			__( 'Search box that ignores case and accents, scrollable list and help text.', 'sw-image-layer-for-yith' ),
+			__( 'Tested with WooCommerce and the WoodMart theme (grid and carousel gallery).', 'sw-image-layer-for-yith' ),
+		);
+
+		$description  = '<p>' . esc_html__( 'Overlays the image of the YITH add-on on the main product photo.', 'sw-image-layer-for-yith' ) . '</p><ul>';
+		foreach ( $items as $item ) {
+			$description .= '<li>' . esc_html( $item ) . '</li>';
+		}
+		$description .= '</ul><p><strong>' . esc_html__( 'Requires:', 'sw-image-layer-for-yith' ) . '</strong> WooCommerce, YITH WooCommerce Product Add-ons &amp; Extra Options Premium.</p>';
 
 		return (object) array(
 			'name'          => 'SW Image Layer for YITH Product',
@@ -183,7 +190,7 @@ class SWIL_Updater {
 			return $links;
 		}
 		$url     = wp_nonce_url( admin_url( 'plugins.php?swil_check=1' ), 'swil_check' );
-		$links[] = '<a href="' . esc_url( $url ) . '">' . esc_html__( 'Buscar actualizaciones', 'sw-image-layer-for-yith' ) . '</a>';
+		$links[] = '<a href="' . esc_url( $url ) . '">' . esc_html__( 'Check for updates', 'sw-image-layer-for-yith' ) . '</a>';
 		$links[] = '<a href="https://github.com/' . esc_attr( SWIL_REPO ) . '" target="_blank" rel="noopener">GitHub</a>';
 		return $links;
 	}

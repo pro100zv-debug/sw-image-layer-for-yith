@@ -1,0 +1,152 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: SW Image Layer for YITH Product 1.2.0\n"
+"Report-Msgid-Bugs-To: https://github.com/pro100zv-debug/sw-image-layer-for-yith/issues\n"
+"POT-Creation-Date: 2026-11-04 13:25+0000\n"
+"PO-Revision-Date: 2026-11-04 13:25+0000\n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Domain: sw-image-layer-for-yith\n"
+
+msgid "Settings"
+msgstr "Ajustes"
+
+msgid "Width (%)"
+msgstr "Ancho (%)"
+
+msgid "Image width relative to the photo width."
+msgstr "Ancho de la imagen respecto al ancho de la foto."
+
+msgid "Set a product image to see the preview."
+msgstr "Asigna una imagen principal al producto para ver la vista previa."
+
+msgid "Search box"
+msgstr "Buscador"
+
+msgid "Check for updates"
+msgstr "Buscar actualizaciones"
+
+msgid "Center of the image from the left edge of the photo. 50 = center."
+msgstr "Centro de la imagen desde el borde izquierdo de la foto. 50 = centro."
+
+msgid "Center of the image from the top edge of the photo."
+msgstr "Centro de la imagen desde el borde superior de la foto."
+
+msgid "Accent color"
+msgstr "Color de acento"
+
+msgid "Image add-on"
+msgstr "Complemento con imágenes"
+
+msgid "YITH add-on («Label or image» type) whose images are placed on the product photo. Its list gets the search box."
+msgstr "Complemento de YITH (tipo «Label or image») cuyas imágenes se colocan sobre la foto del producto. Su lista recibe el buscador."
+
+msgid "How many options are visible without scrolling; the rest scroll inside the list."
+msgstr "Cuántas opciones se ven sin desplazarse; el resto se desplaza dentro de la lista."
+
+#, php-format
+msgid "Leave a field empty to use the default position (%s)."
+msgstr "Deja un campo vacío para usar la posición por defecto (%s)."
+
+msgid "On this product the chosen image is not placed on the photo. The YITH option and its price stay."
+msgstr "En este producto la imagen elegida no se coloca sobre la foto. La opción de YITH y su precio se mantienen."
+
+msgid "Visible rows"
+msgstr "Filas visibles"
+
+msgid "Add-on ID"
+msgstr "ID del complemento"
+
+msgid "Main product image. The preview changes as you type; update the product to apply the values."
+msgstr "Imagen principal del producto. La vista previa cambia al escribir los valores; guarda el producto para aplicarlos."
+
+msgid "The image is shown on every product where YITH shows this add-on. To hide it or change its position on a product: Product → Product data → «SW Image Layer» tab."
+msgstr "La imagen se muestra en todos los productos donde YITH muestra este complemento. Para ocultarla o cambiar su posición en un producto: Producto → Datos del producto → pestaña «SW Image Layer»."
+
+msgid "Show a search box above the list"
+msgstr "Mostrar un buscador encima de la lista"
+
+msgid "Do not show the image"
+msgstr "No mostrar la imagen"
+
+msgid "The YITH list could not be read. Enter the add-on number: it appears on the page as id=\"yith-wapo-addon-NUMBER\"."
+msgstr "No se ha podido leer la lista de YITH. Escribe el número del complemento: aparece en la página como id=\"yith-wapo-addon-NÚMERO\"."
+
+msgid "Selected option, active search box border and help text."
+msgstr "Opción elegida, borde del buscador activo y texto de ayuda."
+
+msgid "Horizontal position (X, %)"
+msgstr "Posición horizontal (X, %)"
+
+msgid "Default position"
+msgstr "Posición por defecto"
+
+msgid "Vertical position (Y, %)"
+msgstr "Posición vertical (Y, %)"
+
+msgid "SW Image Layer for YITH Product"
+msgstr "SW Image Layer for YITH Product"
+
+msgid "Shown above the list while no option is selected; replaces the YITH error notice. Leave empty to hide it."
+msgstr "Se muestra encima de la lista mientras no hay ninguna opción elegida y sustituye al aviso de error de YITH. Déjalo vacío para no mostrarlo."
+
+msgid "Used on every product that shows the add-on. On each product you can enter its own position or leave the fields empty to use this one."
+msgstr "Se usa en todos los productos que muestran el complemento. En cada producto puedes escribir su propia posición o dejar los campos vacíos para usar esta."
+
+msgid "Untitled"
+msgstr "Sin título"
+
+msgid "Help text"
+msgstr "Texto de ayuda"
+
+msgid "Search placeholder"
+msgstr "Texto del buscador"
+
+msgid "No results text"
+msgstr "Texto sin resultados"
+
+msgid "Preview"
+msgstr "Vista previa"
+
+msgid "requires the YITH WooCommerce Product Add-ons & Extra Options Premium plugin to be active."
+msgstr "necesita el plugin YITH WooCommerce Product Add-ons & Extra Options Premium activo."
+
+msgid "— Select an add-on —"
+msgstr "— Selecciona un complemento —"
+
+msgid "Places the image chosen in YITH Product Add-ons (for example, an embroidered crest) on the first photo of the product gallery."
+msgstr "Coloca la imagen elegida en YITH Product Add-ons (por ejemplo, un escudo bordado) sobre la primera foto de la galería."
+
+msgid "Shown on every product where YITH shows the add-on, with a default position."
+msgstr "Se muestra en todos los productos donde YITH muestra el complemento, con una posición por defecto."
+
+msgid "Per product: own position (X, Y) and width in percent, or a checkbox to hide the image."
+msgstr "En cada producto: posición (X, Y) y ancho propios en porcentaje, o casilla para no mostrar la imagen."
+
+msgid "Search box that ignores case and accents, scrollable list and help text."
+msgstr "Buscador sin distinguir mayúsculas ni tildes, lista con desplazamiento y texto de ayuda."
+
+msgid "Tested with WooCommerce and the WoodMart theme (grid and carousel gallery)."
+msgstr "Probado con WooCommerce y el tema WoodMart (galería en cuadrícula y carrusel)."
+
+msgid "Overlays the image of the YITH add-on on the main product photo."
+msgstr "Superposición de la imagen del complemento de YITH sobre la foto principal del producto."
+
+msgid "Requires:"
+msgstr "Requiere:"
+
+msgid "Search…"
+msgstr "Buscar…"
+
+msgid "No results found."
+msgstr "No se ha encontrado ningún resultado."
+
+msgid "Select an option to continue."
+msgstr "Selecciona una opción para continuar."
+
+msgid "Overlays the image chosen in a YITH Product Add-ons option on the main product photo. Adds a search box to image option lists and places the chosen image (for example, an embroidered crest) on the first gallery photo, with its own position and size per product."
+msgstr "Superposición de la imagen del complemento de YITH sobre la foto principal del producto. Añade buscador a la lista de opciones con imagen y coloca la imagen elegida (por ejemplo, un escudo bordado) sobre la primera foto de la galería, con posición y tamaño propios en cada producto."
+

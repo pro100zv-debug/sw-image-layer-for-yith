@@ -30,6 +30,12 @@ El precio, el carrito, el pedido y los correos los gestiona YITH como siempre.
 - YITH WooCommerce Product Add-ons & Extra Options **Premium**
 - Probado con el tema WoodMart (galería en cuadrícula y en carrusel)
 
+## Idiomas
+
+Los ajustes del plugin se muestran en el idioma del perfil del usuario (o en el del sitio): **inglés**, **español** y **ruso**. Otras variantes del español (es_MX, es_AR…) usan la traducción de España; el resto de idiomas, el inglés.
+
+Los textos que ve el cliente en la ficha (buscador, ayuda, sin resultados) se escriben en los ajustes, en el idioma de la tienda.
+
 ## Instalación
 
 1. Descarga el ZIP con el enlace de arriba.
@@ -69,9 +75,13 @@ Los colores y medidas son variables CSS. Ejemplo para el CSS del tema:
 
 1. Sube el número en `Version:` de `sw-image-layer-for-yith.php` y en `SWIL_VERSION`.
 2. Añade debajo de «Cambios» una sección `### X.Y.Z` con la lista de cambios.
-3. Sube los cambios a `main`. La acción «Publicar versión» crea el release `vX.Y.Z` con el ZIP; los sitios ven «Actualizar» en Plugins.
+3. Si cambian textos de la administración, actualiza `languages/` (.pot, .po y .mo).
+4. Sube los cambios a `main`. La acción «Publicar versión» crea el release `vX.Y.Z` con el ZIP; los sitios ven «Actualizar» en Plugins.
 
 ## Cambios
+
+### 1.2.0
+- Traducciones: inglés como idioma base, español y ruso. Los ajustes se muestran en el idioma del perfil del usuario.
 
 ### 1.1.0
 - La imagen se muestra en todos los productos donde YITH muestra el complemento; ya no hay que activarla producto por producto.

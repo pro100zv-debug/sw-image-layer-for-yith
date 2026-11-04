@@ -45,7 +45,7 @@ class SWIL_YITH {
 				continue;
 			}
 
-			$title = ! empty( $settings['title'] ) ? wp_strip_all_tags( $settings['title'] ) : __( 'Sin título', 'sw-image-layer-for-yith' );
+			$title = ! empty( $settings['title'] ) ? wp_strip_all_tags( $settings['title'] ) : __( 'Untitled', 'sw-image-layer-for-yith' );
 			$label = sprintf( '%s (#%d)', $title, (int) $row->id );
 
 			if ( isset( $row->block_id ) && isset( $blocks[ (int) $row->block_id ] ) ) {
