@@ -145,13 +145,14 @@ class SWIL_Updater {
 		$description .= '<li>Posición (X, Y) y ancho en porcentaje, propios de cada producto.</li>';
 		$description .= '<li>Buscador sin distinguir mayúsculas ni tildes, lista con desplazamiento y texto de ayuda.</li>';
 		$description .= '<li>Probado con WooCommerce y el tema WoodMart (cuadrícula y carrusel).</li></ul>';
+		$description .= '<p><strong>Requiere:</strong> WooCommerce y YITH WooCommerce Product Add-ons &amp; Extra Options Premium.</p>';
 
 		return (object) array(
 			'name'          => 'SW Image Layer for YITH Product',
 			'slug'          => SWIL_SLUG,
 			'version'       => $version,
-			'author'        => '<a href="https://github.com/pro100zv-debug">Sergio</a>',
-			'homepage'      => 'https://github.com/' . SWIL_REPO,
+			'author'        => '<a href="https://sergioweb.es/">Sergio</a>',
+			'homepage'      => 'https://sergioweb.es/',
 			'requires'      => '6.5',
 			'requires_php'  => '7.4',
 			'last_updated'  => $release ? $release['published'] : '',

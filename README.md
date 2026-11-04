@@ -4,7 +4,7 @@
 
 Superposición de la imagen del complemento de YITH sobre la foto principal del producto.
 
-Pensado para tiendas que ofrecen un bordado, un estampado o un parche: el cliente elige una opción con imagen en **YITH WooCommerce Product Add-ons & Extra Options** y ve al momento cómo queda sobre la prenda.
+Pensado para tiendas que ofrecen un bordado, un estampado o un parche: el cliente elige una opción con imagen en **YITH WooCommerce Product Add-ons & Extra Options Premium** y ve al momento cómo queda sobre la prenda.
 
 **[⬇ Descargar el plugin (última versión)](https://github.com/pro100zv-debug/sw-image-layer-for-yith/releases/latest/download/sw-image-layer-for-yith.zip)**
 
@@ -26,7 +26,7 @@ El precio, el carrito, el pedido y los correos los gestiona YITH como siempre.
 
 - WordPress 6.5 o superior, PHP 7.4 o superior
 - WooCommerce 8.0 o superior
-- YITH WooCommerce Product Add-ons & Extra Options (versión gratuita o premium)
+- YITH WooCommerce Product Add-ons & Extra Options **Premium**
 - Probado con el tema WoodMart (galería en cuadrícula y en carrusel)
 
 ## Instalación
@@ -69,8 +69,17 @@ Los colores y medidas son variables CSS. Ejemplo para el CSS del tema:
 
 ## Cambios
 
+### 1.0.1
+- El enlace del autor lleva a sergioweb.es.
+- Se quita el enlace «Visitar la web del plugin».
+- YITH WooCommerce Product Add-ons & Extra Options Premium aparece como plugin requerido.
+
 ### 1.0.0
 - Primera versión.
+
+## Autor
+
+[Sergio](https://sergioweb.es/)
 
 ## Licencia
 
