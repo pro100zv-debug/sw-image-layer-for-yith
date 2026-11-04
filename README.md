@@ -80,6 +80,9 @@ Los colores y medidas son variables CSS. Ejemplo para el CSS del tema:
 
 ## Cambios
 
+### 1.2.2
+- Vista previa del producto corregida: la imagen (o un recuadro, si no hay imagen de muestra) se ve sobre la foto y cambia de posición y tamaño al escribir los valores.
+
 ### 1.2.1
 - Las nuevas versiones se detectan antes: la información de GitHub se guarda 1 hora en lugar de 6.
 - «Comprobar de nuevo» en Escritorio → Actualizaciones también busca la última versión en GitHub.

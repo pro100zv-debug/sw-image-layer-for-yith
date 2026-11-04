@@ -1,59 +1,97 @@
 /* SW Image Layer · pestaña del producto */
-#swil_product_data .swil-preview {
-	position: relative;
-	display: inline-block;
-	width: 260px;
-	max-width: 100%;
-	line-height: 0;
-	border: 1px solid #dcdcde;
-	background: #f6f7f7;
-	vertical-align: top;
-}
-
-#swil_product_data .swil-preview-photo {
-	display: block;
-	width: 100%;
-	height: auto;
-}
-
-#swil_product_data .swil-preview-layer {
-	position: absolute;
-	transform: translate(-50%, -50%);
-	line-height: 0;
-	pointer-events: none;
-}
-
-#swil_product_data .swil-preview-layer img {
-	display: block;
-	width: 100%;
-	height: auto;
-}
-
-#swil_product_data .swil-preview-layer.is-empty {
-	aspect-ratio: 1 / 1;
-	border: 2px dashed #811609;
-	background: rgba(129, 22, 9, .08);
-}
-
-#swil_product_data .swil-preview.is-off .swil-preview-layer {
-	opacity: .35;
-}
-
-#swil_product_data .swil-preview-note {
-	display: block;
-	clear: both;
-	margin: 8px 0 0;
-	max-width: 420px;
-	line-height: 1.5;
-}
 
 #swil_product_data .swil-intro {
 	margin: 9px 12px 0 162px;
 	color: #646970;
 }
 
+/* Fila de la vista previa con la misma sangría que los campos de WooCommerce */
+#swil_product_data .swil-preview-row {
+	display: flex;
+	gap: 12px;
+	padding: 5px 20px 12px 12px;
+}
+
+#swil_product_data .swil-preview-label {
+	flex: 0 0 150px;
+	padding-top: 2px;
+}
+
+#swil_product_data .swil-preview-body {
+	flex: 1 1 auto;
+	min-width: 0;
+}
+
+#swil_product_data .swil-preview {
+	position: relative;
+	display: block;
+	width: 280px;
+	max-width: 100%;
+	line-height: 0;
+	border: 1px solid #dcdcde;
+	background: #f6f7f7;
+	overflow: hidden;
+}
+
+#swil_product_data .swil-preview img.swil-preview-photo {
+	display: block !important;
+	width: 100% !important;
+	max-width: none !important;
+	height: auto !important;
+	margin: 0 !important;
+}
+
+/* Capa: siempre visible (marco + tono), con la imagen de muestra encima si existe */
+#swil_product_data .swil-preview-layer {
+	position: absolute;
+	z-index: 2;
+	display: block;
+	box-sizing: border-box;
+	aspect-ratio: 1 / 1;
+	transform: translate(-50%, -50%);
+	border: 2px dashed #ffffff;
+	outline: 1px solid #811609;
+	background: rgba(129, 22, 9, .55);
+	pointer-events: none;
+}
+
+#swil_product_data .swil-preview-layer img {
+	position: absolute;
+	inset: 0;
+	display: block !important;
+	width: 100% !important;
+	max-width: none !important;
+	height: 100% !important;
+	margin: 0 !important;
+	object-fit: contain;
+}
+
+/* Con imagen de muestra cargada, el tono se quita y queda solo el marco fino */
+#swil_product_data .swil-preview-layer:has(img) {
+	border-width: 1px;
+	background: transparent;
+}
+
+#swil_product_data .swil-preview.is-off .swil-preview-layer {
+	opacity: .3;
+}
+
+#swil_product_data .swil-preview-note {
+	margin: 8px 0 0;
+	max-width: 420px;
+	line-height: 1.5;
+}
+
 @media (max-width: 782px) {
 	#swil_product_data .swil-intro {
 		margin-left: 12px;
+	}
+
+	#swil_product_data .swil-preview-row {
+		flex-direction: column;
+	}
+
+	#swil_product_data .swil-preview-label {
+		flex: none;
 	}
 }

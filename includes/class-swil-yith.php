@@ -112,14 +112,46 @@ class SWIL_YITH {
 		$options = $wpdb->get_var( $wpdb->prepare( "SELECT options FROM {$table} WHERE id = %d", $addon_id ) ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		$options = maybe_unserialize( $options );
 
-		if ( is_array( $options ) && ! empty( $options['image'] ) && is_array( $options['image'] ) ) {
-			foreach ( $options['image'] as $image ) {
-				if ( is_string( $image ) && '' !== trim( $image ) ) {
-					return esc_url_raw( $image );
+		if ( ! is_array( $options ) ) {
+			return '';
+		}
+
+		// YITH puede guardar la imagen como URL o como ID de adjunto, según la versión.
+		foreach ( array( 'image', 'images', 'image_url', 'image_id' ) as $key ) {
+			if ( empty( $options[ $key ] ) || ! is_array( $options[ $key ] ) ) {
+				continue;
+			}
+			foreach ( $options[ $key ] as $image ) {
+				$url = self::image_to_url( $image );
+				if ( $url ) {
+					return $url;
 				}
 			}
 		}
 
+		return '';
+	}
+
+	/**
+	 * URL a partir de lo que YITH haya guardado: URL, ID o array con url/id.
+	 *
+	 * @param mixed $image Valor guardado.
+	 * @return string
+	 */
+	private static function image_to_url( $image ) {
+		if ( is_array( $image ) ) {
+			$image = isset( $image['url'] ) ? $image['url'] : ( isset( $image['id'] ) ? $image['id'] : '' );
+		}
+		if ( is_numeric( $image ) && (int) $image > 0 ) {
+			$url = wp_get_attachment_image_url( (int) $image, 'medium' );
+			return $url ? $url : '';
+		}
+		if ( is_string( $image ) ) {
+			$image = trim( $image );
+			if ( preg_match( '#^(https?:)?//#i', $image ) || 0 === strpos( $image, '/' ) ) {
+				return esc_url_raw( $image );
+			}
+		}
 		return '';
 	}
 }

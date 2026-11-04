@@ -133,22 +133,25 @@ class SWIL_Product {
 			</div>
 
 			<div class="options_group swil-preview-group">
-				<p class="form-field">
-					<label><?php esc_html_e( 'Preview', 'sw-image-layer-for-yith' ); ?></label>
-					<?php if ( $photo ) : ?>
-						<span class="swil-preview" id="swil-preview">
-							<img src="<?php echo esc_url( $photo ); ?>" alt="" class="swil-preview-photo">
-							<span class="swil-preview-layer<?php echo $sample ? '' : ' is-empty'; ?>">
-								<?php if ( $sample ) : ?>
-									<img src="<?php echo esc_url( $sample ); ?>" alt="">
-								<?php endif; ?>
-							</span>
-						</span>
-						<span class="description swil-preview-note"><?php esc_html_e( 'Main product image. The preview changes as you type; update the product to apply the values.', 'sw-image-layer-for-yith' ); ?></span>
-					<?php else : ?>
-						<span class="description"><?php esc_html_e( 'Set a product image to see the preview.', 'sw-image-layer-for-yith' ); ?></span>
-					<?php endif; ?>
-				</p>
+				<div class="swil-preview-row">
+					<span class="swil-preview-label"><?php esc_html_e( 'Preview', 'sw-image-layer-for-yith' ); ?></span>
+					<div class="swil-preview-body">
+						<?php if ( $photo ) : ?>
+							<?php $zone = array_merge( $defaults, $own ); ?>
+							<div class="swil-preview" id="swil-preview">
+								<img src="<?php echo esc_url( $photo ); ?>" alt="" class="swil-preview-photo">
+								<div class="swil-preview-layer" style="<?php echo esc_attr( sprintf( 'left:%s%%;top:%s%%;width:%s%%;', $zone['x'], $zone['y'], $zone['w'] ) ); ?>">
+									<?php if ( $sample ) : ?>
+										<img src="<?php echo esc_url( $sample ); ?>" alt="" onerror="this.remove()">
+									<?php endif; ?>
+								</div>
+							</div>
+							<p class="description swil-preview-note"><?php esc_html_e( 'Main product image. The preview changes as you type; update the product to apply the values.', 'sw-image-layer-for-yith' ); ?></p>
+						<?php else : ?>
+							<p class="description"><?php esc_html_e( 'Set a product image to see the preview.', 'sw-image-layer-for-yith' ); ?></p>
+						<?php endif; ?>
+					</div>
+				</div>
 			</div>
 		</div>
 		<?php
@@ -191,7 +194,8 @@ class SWIL_Product {
 	}
 
 	public static function assets( $hook ) {
-		if ( ! in_array( $hook, array( 'post.php', 'post-new.php' ), true ) || 'product' !== get_post_type() ) {
+		$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
+		if ( ! in_array( $hook, array( 'post.php', 'post-new.php' ), true ) || ! $screen || 'product' !== $screen->post_type ) {
 			return;
 		}
 		wp_enqueue_style( 'swil-admin', SWIL_URL . 'assets/css/swil-admin.css', array(), SWIL_VERSION );
