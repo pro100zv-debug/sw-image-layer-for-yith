@@ -69,6 +69,9 @@ Los colores y medidas son variables CSS. Ejemplo para el CSS del tema:
 
 ## Cambios
 
+### 1.0.2
+- El buscador ya no sobresale del recuadro de la lista.
+
 ### 1.0.1
 - El enlace del autor lleva a sergioweb.es.
 - Se quita el enlace «Visitar la web del plugin».

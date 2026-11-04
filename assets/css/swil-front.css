@@ -74,6 +74,10 @@
 
 .swil-addon .options-container {
 	display: block !important;
+	box-sizing: border-box;
+	width: 100% !important;
+	max-width: 100% !important;
+	overflow: hidden;
 	border: 1px solid var(--swil-border);
 	background: #fff;
 }
@@ -81,6 +85,8 @@
 /* Buscador */
 .swil-search {
 	position: relative;
+	box-sizing: border-box;
+	width: 100%;
 	padding: 10px;
 	border-bottom: 1px solid var(--swil-border);
 }
@@ -101,7 +107,9 @@
 
 .swil-search input[type="search"] {
 	display: block;
+	box-sizing: border-box !important;
 	width: 100% !important;
+	max-width: 100% !important;
 	height: 46px !important;
 	min-height: 0 !important;
 	margin: 0 !important;
