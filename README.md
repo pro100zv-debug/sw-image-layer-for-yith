@@ -80,6 +80,11 @@ Los colores y medidas son variables CSS. Ejemplo para el CSS del tema:
 
 ## Cambios
 
+### 1.2.1
+- Las nuevas versiones se detectan antes: la información de GitHub se guarda 1 hora en lugar de 6.
+- «Comprobar de nuevo» en Escritorio → Actualizaciones también busca la última versión en GitHub.
+- Nuevo banner.
+
 ### 1.2.0
 - Traducciones: inglés como idioma base, español y ruso. Los ajustes se muestran en el idioma del perfil del usuario.
 

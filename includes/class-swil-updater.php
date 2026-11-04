@@ -22,6 +22,7 @@ class SWIL_Updater {
 		add_action( 'upgrader_process_complete', array( __CLASS__, 'purge' ), 10, 2 );
 		add_filter( 'plugin_row_meta', array( __CLASS__, 'row_meta' ), 10, 2 );
 		add_action( 'admin_init', array( __CLASS__, 'check_now' ) );
+		add_action( 'load-update-core.php', array( __CLASS__, 'force_check' ) );
 	}
 
 	/**
@@ -78,7 +79,7 @@ class SWIL_Updater {
 			'published' => isset( $data['published_at'] ) ? $data['published_at'] : '',
 		);
 
-		set_site_transient( self::CACHE, $release, 6 * HOUR_IN_SECONDS );
+		set_site_transient( self::CACHE, $release, HOUR_IN_SECONDS );
 		return $release;
 	}
 
@@ -193,6 +194,15 @@ class SWIL_Updater {
 		$links[] = '<a href="' . esc_url( $url ) . '">' . esc_html__( 'Check for updates', 'sw-image-layer-for-yith' ) . '</a>';
 		$links[] = '<a href="https://github.com/' . esc_attr( SWIL_REPO ) . '" target="_blank" rel="noopener">GitHub</a>';
 		return $links;
+	}
+
+	/**
+	 * «Comprobar de nuevo» en Escritorio → Actualizaciones también vacía la caché.
+	 */
+	public static function force_check() {
+		if ( ! empty( $_GET['force-check'] ) && current_user_can( 'update_plugins' ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			delete_site_transient( self::CACHE );
+		}
 	}
 
 	/**

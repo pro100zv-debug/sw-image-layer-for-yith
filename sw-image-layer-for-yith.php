@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       SW Image Layer for YITH Product
  * Description:       Overlays the image chosen in a YITH Product Add-ons option on the main product photo. Adds a search box to image option lists and places the chosen image (for example, an embroidered crest) on the first gallery photo, with its own position and size per product.
- * Version:           1.2.0
+ * Version:           1.2.1
  * Requires at least: 6.5
  * Requires PHP:      7.4
  * Requires Plugins:  woocommerce, yith-woocommerce-advanced-product-options-premium
@@ -18,7 +18,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'SWIL_VERSION', '1.2.0' );
+define( 'SWIL_VERSION', '1.2.1' );
 define( 'SWIL_FILE', __FILE__ );
 define( 'SWIL_DIR', plugin_dir_path( __FILE__ ) );
 define( 'SWIL_URL', plugin_dir_url( __FILE__ ) );
