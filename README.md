@@ -80,6 +80,9 @@ Los colores y medidas son variables CSS. Ejemplo para el CSS del tema:
 
 ## Cambios
 
+### 1.2.3
+- Corregido: la imagen sobre la foto ya no se recorta cuando el tema da a las fotos de la galería una proporción fija (aspect-ratio / object-fit).
+
 ### 1.2.2
 - Vista previa del producto corregida: la imagen (o un recuadro, si no hay imagen de muestra) se ve sobre la foto y cambia de posición y tamaño al escribir los valores.
 
