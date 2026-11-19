@@ -22,6 +22,11 @@
 	}
 	var ENABLED = isOn(C.enabled);
 	var SEARCH = isOn(C.search);
+	var SCROLL = C.scroll === undefined ? true : isOn(C.scroll);
+	var LIGHTBOX = C.lightbox === undefined ? true : isOn(C.lightbox);
+
+	/* El cliente acaba de elegir una opción con el ratón o el dedo */
+	var userPick = false;
 
 	var ADDON = '#yith-wapo-addon-' + C.addonId;
 	var OPTION = '.yith-wapo-option';
@@ -173,6 +178,197 @@
 		}
 	}
 
+	/* ---------- Desplazamiento hasta la foto ---------- */
+
+	/* Alto de la cabecera fija (WoodMart, Elementor, barra de administración) */
+	function headerOffset() {
+		var bottom = 0;
+		var els = document.querySelectorAll('#wpadminbar, header, .whb-header, .whb-sticky-header, .whb-main-header, .elementor-sticky--active, .site-header');
+		for (var i = 0; i < els.length; i++) {
+			var el = els[i];
+			var pos = window.getComputedStyle(el).position;
+			if (pos !== 'fixed' && pos !== 'sticky') {
+				continue;
+			}
+			var r = el.getBoundingClientRect();
+			if (r.height > 0 && r.top <= 1 && r.bottom > bottom && r.bottom < window.innerHeight / 2) {
+				bottom = r.bottom;
+			}
+		}
+		return bottom;
+	}
+
+	function scrollToGallery() {
+		var gallery = document.querySelector('.woocommerce-product-gallery');
+		if (!gallery) {
+			return;
+		}
+		var target = Math.max(0, Math.round(window.pageYOffset + gallery.getBoundingClientRect().top - headerOffset() - 16));
+		if (Math.abs(window.pageYOffset - target) < 8) {
+			return;
+		}
+		try {
+			window.scrollTo({ top: target, behavior: 'smooth' });
+		} catch (e) {
+			window.scrollTo(0, target);
+		}
+	}
+
+	/* ---------- Vista ampliada (lightbox) ----------
+	 * Se crea una copia de la foto grande con la imagen elegida ya dibujada
+	 * y se pone en los atributos que leen los lightbox (href y data-large_image).
+	 * Así funciona con cualquier lightbox, con zoom y gestos incluidos.
+	 */
+	var big = { key: '', url: '', loading: '' };
+
+	function isBlob(u) {
+		return typeof u === 'string' && u.indexOf('blob:') === 0;
+	}
+
+	function sameOrigin(u) {
+		try {
+			return new URL(u, window.location.href).origin === window.location.origin;
+		} catch (e) {
+			return true;
+		}
+	}
+
+	function loadImage(u) {
+		return new Promise(function (resolve, reject) {
+			var im = new Image();
+			if (!sameOrigin(u)) {
+				im.crossOrigin = 'anonymous';
+			}
+			im.onload = function () { resolve(im); };
+			im.onerror = reject;
+			im.src = u;
+		});
+	}
+
+	function buildComposite(photoUrl, layerUrl, z) {
+		return Promise.all([loadImage(photoUrl), loadImage(layerUrl)]).then(function (imgs) {
+			var photo = imgs[0], layer = imgs[1];
+			var W = photo.naturalWidth, H = photo.naturalHeight;
+			if (!W || !H || !layer.naturalWidth) {
+				throw new Error('size');
+			}
+			var canvas = document.createElement('canvas');
+			canvas.width = W;
+			canvas.height = H;
+			var ctx = canvas.getContext('2d');
+			ctx.drawImage(photo, 0, 0, W, H);
+			var lw = W * z.w / 100;
+			var lh = lw * layer.naturalHeight / layer.naturalWidth;
+			ctx.imageSmoothingQuality = 'high';
+			ctx.drawImage(layer, W * z.x / 100 - lw / 2, H * z.y / 100 - lh / 2, lw, lh);
+			return new Promise(function (resolve, reject) {
+				canvas.toBlob(function (blob) {
+					if (blob) {
+						resolve(URL.createObjectURL(blob));
+					} else {
+						reject(new Error('blob'));
+					}
+				}, 'image/jpeg', 0.92);
+			});
+		});
+	}
+
+	/* Guarda una sola vez el valor original para que WooCommerce pueda restaurarlo al cambiar de variación */
+	function keepOriginal($el, attr) {
+		if ($el.length && $el.attr('data-o_' + attr) === undefined) {
+			var v = $el.attr(attr);
+			$el.attr('data-o_' + attr, v ? v : '');
+		}
+	}
+
+	function setBigAttrs($link, $img, url) {
+		if ($link.length) {
+			keepOriginal($link, 'href');
+			$link.attr('href', url);
+		}
+		if ($img.length && $img.attr('data-large_image') !== undefined) {
+			keepOriginal($img, 'data-large_image');
+			$img.attr('data-large_image', url);
+		}
+	}
+
+	function restoreBig($figure) {
+		var fig = $figure[0];
+		if (!fig || !fig.hasAttribute('data-swil-orig-href')) {
+			return;
+		}
+		var $link = $figure.find('a').first();
+		var $img = $figure.find('img').not('.swil-layer img').first();
+		if (isBlob($link.attr('href'))) {
+			$link.attr('href', fig.getAttribute('data-swil-orig-href'));
+		}
+		if (isBlob($img.attr('data-large_image'))) {
+			$img.attr('data-large_image', fig.getAttribute('data-swil-orig-large'));
+		}
+		fig.removeAttribute('data-swil-orig-href');
+		fig.removeAttribute('data-swil-orig-large');
+	}
+
+	function updateBig($figure, src) {
+		if (!LIGHTBOX || !$figure.length || !window.Promise || !window.URL || !URL.createObjectURL) {
+			return;
+		}
+		var fig = $figure[0];
+		var $link = $figure.find('a').first();
+		var $img = $figure.find('img').not('.swil-layer img').first();
+
+		/* Foto original actual: si el tema la ha cambiado (otra variación), se toma la nueva */
+		var href = $link.attr('href') || '';
+		var large = $img.attr('data-large_image') || '';
+		if (!isBlob(href) && !isBlob(large)) {
+			fig.setAttribute('data-swil-orig-href', href);
+			fig.setAttribute('data-swil-orig-large', large);
+		}
+
+		if (!src) {
+			restoreBig($figure);
+			big.key = '';
+			return;
+		}
+
+		var photo = fig.getAttribute('data-swil-orig-large') || fig.getAttribute('data-swil-orig-href') || $img.attr('src') || '';
+		if (!photo || isBlob(photo)) {
+			return;
+		}
+
+		var z = C.zone || {};
+		var zone = { x: z.x !== undefined ? z.x : 50, y: z.y !== undefined ? z.y : 35, w: z.w !== undefined ? z.w : 18 };
+		var key = photo + '|' + src + '|' + zone.x + '|' + zone.y + '|' + zone.w;
+
+		if (key === big.key && big.url) {
+			setBigAttrs($link, $img, big.url);
+			return;
+		}
+		if (key === big.loading) {
+			return;
+		}
+		big.loading = key;
+
+		buildComposite(photo, src, zone).then(function (url) {
+			if (big.loading !== key) {
+				URL.revokeObjectURL(url);
+				return;
+			}
+			big.loading = '';
+			if (big.url) {
+				URL.revokeObjectURL(big.url);
+			}
+			big.key = key;
+			big.url = url;
+			if (lastSrc === src && getFigure()[0] === fig) {
+				setBigAttrs($link, $img, url);
+			}
+		}).catch(function () {
+			/* Imagen de otro dominio sin permiso, por ejemplo: se queda la foto normal */
+			big.loading = '';
+		});
+	}
+
 	function renderLayer(src) {
 		var $figure = getFigure();
 
@@ -243,10 +439,18 @@
 
 		renderLayer(src);
 
-		if (src && src !== lastSrc) {
-			goToFirstSlide();
-		}
+		var changed = src && src !== lastSrc;
 		lastSrc = src;
+
+		updateBig(getFigure(), src);
+
+		if (changed) {
+			goToFirstSlide();
+			if (userPick && SCROLL) {
+				scrollToGallery();
+			}
+		}
+		userPick = false;
 	}
 
 	function schedule() {
@@ -262,11 +466,15 @@
 	$(function () {
 		refresh();
 
-		$(document).on('click change', ADDON + ' ' + OPTION + ', ' + ADDON + ' ' + INPUT, function () {
+		$(document).on('click change', ADDON + ' ' + OPTION + ', ' + ADDON + ' ' + INPUT, function (e) {
+			if (e.originalEvent) {
+				userPick = true;
+			}
 			setTimeout(schedule, 0);
 		});
 		$(document).on('found_variation reset_data show_variation hide_variation', 'form.variations_form', function () {
 			setTimeout(schedule, 60);
+			setTimeout(schedule, 400);
 		});
 
 		if (!window.MutationObserver) {

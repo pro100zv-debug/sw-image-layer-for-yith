@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: SW Image Layer for YITH Product 1.2.0\n"
+"Project-Id-Version: SW Image Layer for YITH Product 1.3.0\n"
 "Report-Msgid-Bugs-To: https://github.com/pro100zv-debug/sw-image-layer-for-yith/issues\n"
 "POT-Creation-Date: 2026-11-04 13:25+0000\n"
 "PO-Revision-Date: 2026-11-04 13:25+0000\n"
@@ -149,4 +149,16 @@ msgstr "Выберите вариант, чтобы продолжить."
 
 msgid "Overlays the image chosen in a YITH Product Add-ons option on the main product photo. Adds a search box to image option lists and places the chosen image (for example, an embroidered crest) on the first gallery photo, with its own position and size per product."
 msgstr "Накладывает изображение, выбранное в поле YITH Product Add-ons, на основное фото товара. Добавляет поиск к списку вариантов с изображениями и ставит выбранное изображение (например, вышитую эмблему) на первое фото галереи, с позицией и размером для каждого товара."
+
+msgid "Scroll to the photo"
+msgstr "Прокрутка к фото"
+
+msgid "When an option is chosen, scroll the page up to the product photo so the customer sees the result"
+msgstr "При выборе варианта страница прокручивается к фото товара, чтобы покупатель увидел результат"
+
+msgid "Enlarged view"
+msgstr "Увеличенный просмотр"
+
+msgid "Also show the image when the photo is opened in the lightbox"
+msgstr "Показывать изображение и при открытии фото в увеличенном виде (лайтбокс)"
 

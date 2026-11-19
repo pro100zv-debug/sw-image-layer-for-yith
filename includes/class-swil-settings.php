@@ -50,6 +50,8 @@ class SWIL_Settings {
 		return array(
 			'addon_id'    => '',
 			'search'      => 'yes',
+			'scroll'      => 'yes',
+			'lightbox'    => 'yes',
 			'placeholder' => __( 'Search…', 'sw-image-layer-for-yith' ),
 			'empty_text'  => __( 'No results found.', 'sw-image-layer-for-yith' ),
 			'hint'        => __( 'Select an option to continue.', 'sw-image-layer-for-yith' ),
@@ -115,6 +117,20 @@ class SWIL_Settings {
 				'id'      => 'swil_search',
 				'type'    => 'checkbox',
 				'default' => $d['search'],
+			),
+			array(
+				'title'   => __( 'Scroll to the photo', 'sw-image-layer-for-yith' ),
+				'desc'    => __( 'When an option is chosen, scroll the page up to the product photo so the customer sees the result', 'sw-image-layer-for-yith' ),
+				'id'      => 'swil_scroll',
+				'type'    => 'checkbox',
+				'default' => $d['scroll'],
+			),
+			array(
+				'title'   => __( 'Enlarged view', 'sw-image-layer-for-yith' ),
+				'desc'    => __( 'Also show the image when the photo is opened in the lightbox', 'sw-image-layer-for-yith' ),
+				'id'      => 'swil_lightbox',
+				'type'    => 'checkbox',
+				'default' => $d['lightbox'],
 			),
 			array(
 				'title'   => __( 'Search placeholder', 'sw-image-layer-for-yith' ),

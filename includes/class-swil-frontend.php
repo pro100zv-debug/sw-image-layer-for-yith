@@ -43,6 +43,8 @@ class SWIL_Frontend {
 				'w' => (float) $config['zone']['w'],
 			),
 			'search'      => 'yes' === SWIL_Settings::get( 'search' ),
+			'scroll'      => 'yes' === SWIL_Settings::get( 'scroll' ),
+			'lightbox'    => 'yes' === SWIL_Settings::get( 'lightbox' ),
 			'rows'        => max( 2, min( 20, absint( SWIL_Settings::get( 'rows' ) ) ) ),
 			'placeholder' => (string) SWIL_Settings::get( 'placeholder' ),
 			'emptyText'   => (string) SWIL_Settings::get( 'empty_text' ),

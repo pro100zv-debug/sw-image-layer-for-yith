@@ -15,6 +15,8 @@ Pensado para tiendas que ofrecen un bordado, un estampado o un parche: el client
 - En cada producto se puede escribir una **posición (X, Y) y un ancho en %** propios, con vista previa en el editor, o marcar **«No mostrar la imagen»**. Al ser porcentajes, se ve igual en ordenador y en móvil.
 - La imagen se mantiene al cambiar de color (variación).
 - En móvil, si la galería es un carrusel, vuelve a la primera foto al elegir una opción.
+- Al elegir una opción, la página sube hasta la foto para que el cliente vea el resultado.
+- La imagen elegida también se ve en la foto ampliada (lightbox), con zoom.
 - Mientras hay imagen elegida, el zoom al pasar el ratón no se muestra sobre la primera foto.
 - **Buscador** encima de la lista: no distingue mayúsculas ni tildes («aguila» encuentra «Águila»).
 - Lista con un número fijo de filas visibles y desplazamiento, para que el botón de compra no quede muy abajo.
@@ -79,6 +81,10 @@ Los colores y medidas son variables CSS. Ejemplo para el CSS del tema:
 4. Sube los cambios a `main`. La acción «Publicar versión» crea el release `vX.Y.Z` con el ZIP; los sitios ven «Actualizar» en Plugins.
 
 ## Cambios
+
+### 1.3.0
+- Al elegir una opción, la página sube hasta la foto del producto para que el cliente vea el resultado (en ordenador y en móvil). Se puede desactivar en los ajustes.
+- La imagen elegida también aparece en la vista ampliada (lightbox) de la primera foto, con zoom incluido. Se puede desactivar en los ajustes.
 
 ### 1.2.3
 - Corregido: la imagen sobre la foto ya no se recorta cuando el tema da a las fotos de la galería una proporción fija (aspect-ratio / object-fit).
